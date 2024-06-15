@@ -127,7 +127,7 @@ WORDING : Dict[str, Any] =\
 		'stop_button': '停止',
 		'clear_button': '清除',
 		# about
-		'donate_button': '大灰狼自用专版',
+		'donate_button': '大灰狼专版VX:279437541',
 		# benchmark
 		'benchmark_results_dataframe': '基准测试结果',
 		# benchmark options
