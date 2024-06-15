@@ -5,14 +5,18 @@
 RequestExecutionLevel admin
 ManifestDPIAware true
 
-Name 'FaceFusion 2.6.0'
-OutFile 'FaceFusion_2.6.0.exe'
+Name '大灰狼换脸 2.6.0'
+OutFile '大灰狼换脸_2.6.0.exe'
 
 !define MUI_ICON 'facefusion.ico'
 
+!insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
 Page custom InstallPage PostInstallPage
 !insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
 !insertmacro MUI_LANGUAGE English
 
 Var UseDefault
@@ -21,12 +25,11 @@ Var UseDirectMl
 Var UseOpenVino
 
 Function .onInit
-	StrCpy $INSTDIR 'C:\FaceFusion'
 FunctionEnd
 
 Function InstallPage
 	nsDialogs::Create 1018
-	!insertmacro MUI_HEADER_TEXT 'Choose Your Accelerator' 'Choose your accelerator based on the graphics card.'
+	!insertmacro MUI_HEADER_TEXT '选择加速器' '根据您的显卡选择加速器.'
 
 	${NSD_CreateRadioButton} 0 40u 100% 10u 'Default'
 	Pop $UseDefault
@@ -60,28 +63,28 @@ Function Destroy
 	${EndIf}
 FunctionEnd
 
-Section 'Prepare Your Platform'
-	DetailPrint 'Install GIT'
+Section '准备您的平台'
+	DetailPrint '安装 GIT'
 	inetc::get 'https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/Git-2.45.2-64-bit.exe' '$TEMP\Git.exe'
 	ExecWait '$TEMP\Git.exe /CURRENTUSER /VERYSILENT /DIR=$LOCALAPPDATA\Programs\Git' $0
 	Delete '$TEMP\Git.exe'
 
 	${If} $0 > 0
-		DetailPrint 'Git installation aborted with error code $0'
+		DetailPrint 'GIT安装中断，错误代码 $0'
 		Call Destroy
 	${EndIf}
 
-	DetailPrint 'Uninstall Conda'
+	DetailPrint '卸载 Conda'
 	ExecWait '$LOCALAPPDATA\Programs\Miniconda3\Uninstall-Miniconda3.exe /S _?=$LOCALAPPDATA\Programs\Miniconda3'
 	RMDir /r '$LOCALAPPDATA\Programs\Miniconda3'
 
-	DetailPrint 'Install Conda'
+	DetailPrint '安装 Conda'
 	inetc::get 'https://repo.anaconda.com/miniconda/Miniconda3-py310_24.3.0-0-Windows-x86_64.exe' '$TEMP\Miniconda3.exe'
 	ExecWait '$TEMP\Miniconda3.exe /InstallationType=JustMe /AddToPath=1 /S /D=$LOCALAPPDATA\Programs\Miniconda3' $1
 	Delete '$TEMP\Miniconda3.exe'
 
 	${If} $1 > 0
-		DetailPrint 'Conda installation aborted with error code $1'
+		DetailPrint 'Conda安装中断，错误代码 $1'
 		Call Destroy
 	${EndIf}
 SectionEnd
@@ -91,7 +94,7 @@ Section 'Download Your Copy'
 
 	DetailPrint 'Download Your Copy'
 	RMDir /r $INSTDIR
-	nsExec::Exec '$LOCALAPPDATA\Programs\Git\cmd\git.exe clone https://github.com/facefusion/facefusion --branch 2.6.0 .'
+	nsExec::Exec '$LOCALAPPDATA\Programs\Git\cmd\git.exe clone https://github.com/shidahuilang/facefusion .'
 SectionEnd
 
 Section 'Setup Your Environment'
@@ -125,47 +128,48 @@ Section 'Create Install Batch'
 	FileClose $2
 SectionEnd
 
-Section 'Install Your FFmpeg'
+Section '安装您的 FFmpeg'
 	SetOutPath $INSTDIR
 
-	DetailPrint 'Install Your FFmpeg'
+	DetailPrint '安装您的 FFmpeg'
 	nsExec::ExecToLog 'install-ffmpeg.bat'
 SectionEnd
 
-Section 'Install Your Accelerator'
+Section '安装您的加速器'
 	SetOutPath $INSTDIR
 
-	DetailPrint 'Install Your Accelerator'
+	DetailPrint '安装您的加速器'
 	nsExec::ExecToLog 'install-accelerator.bat'
 SectionEnd
 
-Section 'Install The Application'
+Section '安装应用程序'
 	SetOutPath $INSTDIR
 
-	DetailPrint 'Install The Application'
+	DetailPrint '安装应用程序'
 	nsExec::ExecToLog 'install-application.bat'
 SectionEnd
 
-Section 'Create Run Batch'
+Section '创建运行批处理'
 	SetOutPath $INSTDIR
 	FileOpen $0 run.bat w
 	FileWrite $0 '@echo off && conda activate facefusion && python run.py %*'
 	FileClose $0
 SectionEnd
 
-Section 'Register The Application'
-	DetailPrint 'Register The Application'
+Section '注册应用程序'
+	DetailPrint '注册应用程序'
 
 	CreateDirectory $SMPROGRAMS\FaceFusion
-	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion.lnk' $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
-	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion Benchmark.lnk' $INSTDIR\run.bat '--ui-layouts benchmark --open-browser' $INSTDIR\.install\facefusion.ico
-	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion Webcam.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\大灰狼换脸.lnk' $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼基准测试.lnk' $INSTDIR\run.bat '--ui-layouts benchmark --open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼摄像头.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
 
-	CreateShortcut $DESKTOP\FaceFusion.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
-
+	CreateShortcut $DESKTOP\大灰狼换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+        CreateShortcut $DESKTOP\大灰狼摄像头.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+	
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName 'FaceFusion'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼换脸'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.0'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion Publisher 'Henry Ruhs'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion InstallLocation $INSTDIR
@@ -175,7 +179,8 @@ SectionEnd
 Section 'Uninstall'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe env remove --name facefusion --yes'
 
-	Delete $DESKTOP\FaceFusion.lnk
+	Delete $DESKTOP\大灰狼换脸.lnk
+	Delete $DESKTOP\大灰狼摄像头.lnk
 	RMDir /r $SMPROGRAMS\FaceFusion
 	RMDir /r $INSTDIR
 
