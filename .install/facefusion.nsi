@@ -5,8 +5,8 @@
 RequestExecutionLevel admin
 ManifestDPIAware true
 
-Name '大灰狼换脸 2.6.0'
-OutFile '大灰狼换脸_2.6.0.exe'
+Name '大灰狼视频换脸 2.6.0'
+OutFile '大灰狼视频_2.6.0.exe'
 
 !define MUI_ICON 'facefusion.ico'
 
@@ -160,12 +160,12 @@ Section '注册应用程序'
 	DetailPrint '注册应用程序'
 
 	CreateDirectory $SMPROGRAMS\FaceFusion
-	CreateShortcut '$SMPROGRAMS\FaceFusion\大灰狼换脸.lnk' $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\大灰狼视频换脸.lnk' $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
 	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼基准测试.lnk' $INSTDIR\run.bat '--ui-layouts benchmark --open-browser' $INSTDIR\.install\facefusion.ico
-	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼摄像头.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼直播换脸.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
 
-	CreateShortcut $DESKTOP\大灰狼换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
-        CreateShortcut $DESKTOP\大灰狼摄像头.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut $DESKTOP\大灰狼视频换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+        CreateShortcut $DESKTOP\大灰狼直播换脸.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
 	
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
@@ -179,8 +179,8 @@ SectionEnd
 Section 'Uninstall'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe env remove --name facefusion --yes'
 
-	Delete $DESKTOP\大灰狼换脸.lnk
-	Delete $DESKTOP\大灰狼摄像头.lnk
+	Delete $DESKTOP\大灰狼视频换脸.lnk
+	Delete $DESKTOP\大灰狼直播换脸.lnk
 	RMDir /r $SMPROGRAMS\FaceFusion
 	RMDir /r $INSTDIR
 
