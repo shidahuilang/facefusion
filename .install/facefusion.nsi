@@ -6,7 +6,7 @@ RequestExecutionLevel admin
 ManifestDPIAware true
 
 Name '大灰狼视频换脸2.6.0'
-OutFile '大灰狼视频_2.6.0.exe'
+OutFile '大灰狼视频换脸_2.6.0.exe'
 
 !define MUI_ICON 'facefusion.ico'
 
