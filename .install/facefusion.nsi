@@ -5,7 +5,7 @@
 RequestExecutionLevel admin
 ManifestDPIAware true
 
-Name '大灰狼视频换脸 2.6.0'
+Name '大灰狼视频换脸2.6.0'
 OutFile '大灰狼视频_2.6.0.exe'
 
 !define MUI_ICON 'facefusion.ico'
@@ -169,7 +169,7 @@ Section '注册应用程序'
 	
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼换脸'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换脸'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.0'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion Publisher 'Henry Ruhs'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion InstallLocation $INSTDIR
