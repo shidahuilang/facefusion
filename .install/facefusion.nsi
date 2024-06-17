@@ -10,13 +10,9 @@ OutFile '大灰狼视频换脸_2.6.1.exe'
 
 !define MUI_ICON 'facefusion.ico'
 
-!insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
 Page custom InstallPage PostInstallPage
 !insertmacro MUI_PAGE_INSTFILES
-!insertmacro MUI_PAGE_FINISH
-!insertmacro MUI_UNPAGE_INSTFILES
-!insertmacro MUI_UNPAGE_FINISH
 !insertmacro MUI_LANGUAGE English
 
 Var UseDefault
@@ -25,6 +21,7 @@ Var UseDirectMl
 Var UseOpenVino
 
 Function .onInit
+	StrCpy $INSTDIR 'C:\FaceFusion'
 FunctionEnd
 
 Function InstallPage
@@ -89,21 +86,21 @@ Section '准备您的平台'
 	${EndIf}
 SectionEnd
 
-Section 'Download Your Copy'
+Section '复制项目'
 	SetOutPath $INSTDIR
 
-	DetailPrint 'Download Your Copy'
+	DetailPrint '复制项目'
 	RMDir /r $INSTDIR
 	nsExec::Exec '$LOCALAPPDATA\Programs\Git\cmd\git.exe clone https://github.com/shidahuilang/facefusion .'
 SectionEnd
 
-Section 'Setup Your Environment'
-	DetailPrint 'Setup Your Environment'
+Section '配置环境'
+	DetailPrint '配置环境'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe init --all'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe create --name facefusion python=3.10 --yes'
 SectionEnd
 
-Section 'Create Install Batch'
+Section '创建安装批处理'
 	SetOutPath $INSTDIR
 
 	FileOpen $0 install-ffmpeg.bat w
@@ -128,17 +125,17 @@ Section 'Create Install Batch'
 	FileClose $2
 SectionEnd
 
-Section '安装您的 FFmpeg'
+Section '安装 FFmpeg'
 	SetOutPath $INSTDIR
 
-	DetailPrint '安装您的 FFmpeg'
+	DetailPrint '安装 FFmpeg'
 	nsExec::ExecToLog 'install-ffmpeg.bat'
 SectionEnd
 
-Section '安装您的加速器'
+Section '安装加速器'
 	SetOutPath $INSTDIR
 
-	DetailPrint '安装您的加速器'
+	DetailPrint '安装加速器'
 	nsExec::ExecToLog 'install-accelerator.bat'
 SectionEnd
 
@@ -165,12 +162,12 @@ Section '注册应用程序'
 	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion 大灰狼直播换脸.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
 
 	CreateShortcut $DESKTOP\大灰狼视频换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
-        CreateShortcut $DESKTOP\大灰狼直播换脸.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
-	
+    CreateShortcut $DESKTOP\大灰狼直播换脸.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换脸'
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.0'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.1'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion Publisher 'Henry Ruhs'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion InstallLocation $INSTDIR
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion UninstallString $INSTDIR\uninstall.exe
@@ -178,9 +175,9 @@ SectionEnd
 
 Section 'Uninstall'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe env remove --name facefusion --yes'
-
 	Delete $DESKTOP\大灰狼视频换脸.lnk
 	Delete $DESKTOP\大灰狼直播换脸.lnk
+	Delete $DESKTOP\FaceFusion.lnk
 	RMDir /r $SMPROGRAMS\FaceFusion
 	RMDir /r $INSTDIR
 
