@@ -163,10 +163,12 @@ Section '注册应用程序'
 
 	CreateShortcut $DESKTOP\大灰狼视频换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
     CreateShortcut $DESKTOP\大灰狼直播换脸.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
-
+	CreateShortcut $INSTDIR\大灰狼视频换脸.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+    CreateShortcut $INSTDIR\大灰狼直播换脸.lnk $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+	
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换脸'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.1'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion Publisher 'Henry Ruhs'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion InstallLocation $INSTDIR
@@ -177,7 +179,6 @@ Section 'Uninstall'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe env remove --name facefusion --yes'
 	Delete $DESKTOP\大灰狼视频换脸.lnk
 	Delete $DESKTOP\大灰狼直播换脸.lnk
-	Delete $DESKTOP\FaceFusion.lnk
 	RMDir /r $SMPROGRAMS\FaceFusion
 	RMDir /r $INSTDIR
 
