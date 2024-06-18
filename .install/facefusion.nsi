@@ -175,9 +175,6 @@ Section '注册应用程序'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion UninstallString $INSTDIR\uninstall.exe
 SectionEnd
 		
-Section "删除 run.bat"
-    Delete "$INSTDIR\run.bat"
-SectionEnd
 		
 Section 'Uninstall'
 	nsExec::Exec '$LOCALAPPDATA\Programs\Miniconda3\Scripts\conda.exe env remove --name facefusion --yes'
