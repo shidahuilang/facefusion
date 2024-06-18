@@ -21,57 +21,57 @@ MODELS : ModelSet =\
 {
 	'face_detector_retinaface':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/retinaface_10g.onnx',
+		'url': 'http://2280.eu.org:5888/retinaface_10g.onnx',
 		'path': resolve_relative_path('../.assets/models/retinaface_10g.onnx')
 	},
 	'face_detector_scrfd':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/scrfd_2.5g.onnx',
+		'url': 'http://2280.eu.org:5888/scrfd_2.5g.onnx',
 		'path': resolve_relative_path('../.assets/models/scrfd_2.5g.onnx')
 	},
 	'face_detector_yoloface':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/yoloface_8n.onnx',
+		'url': 'http://2280.eu.org:5888/yoloface_8n.onnx',
 		'path': resolve_relative_path('../.assets/models/yoloface_8n.onnx')
 	},
 	'face_detector_yunet':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/yunet_2023mar.onnx',
+		'url': 'http://2280.eu.org:5888/yunet_2023mar.onnx',
 		'path': resolve_relative_path('../.assets/models/yunet_2023mar.onnx')
 	},
 	'face_recognizer_arcface_blendswap':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_w600k_r50.onnx',
+		'url': 'http://2280.eu.org:5888/arcface_w600k_r50.onnx',
 		'path': resolve_relative_path('../.assets/models/arcface_w600k_r50.onnx')
 	},
 	'face_recognizer_arcface_inswapper':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_w600k_r50.onnx',
+		'url': 'http://2280.eu.org:5888/arcface_w600k_r50.onnx',
 		'path': resolve_relative_path('../.assets/models/arcface_w600k_r50.onnx')
 	},
 	'face_recognizer_arcface_simswap':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_simswap.onnx',
+		'url': 'http://2280.eu.org:5888/arcface_simswap.onnx',
 		'path': resolve_relative_path('../.assets/models/arcface_simswap.onnx')
 	},
 	'face_recognizer_arcface_uniface':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_w600k_r50.onnx',
+		'url': 'http://2280.eu.org:5888/arcface_w600k_r50.onnx',
 		'path': resolve_relative_path('../.assets/models/arcface_w600k_r50.onnx')
 	},
 	'face_landmarker_68':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/2dfan4.onnx',
+		'url': 'http://2280.eu.org:5888/2dfan4.onnx',
 		'path': resolve_relative_path('../.assets/models/2dfan4.onnx')
 	},
 	'face_landmarker_68_5':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/face_landmarker_68_5.onnx',
+		'url': 'http://2280.eu.org:5888/face_landmarker_68_5.onnx',
 		'path': resolve_relative_path('../.assets/models/face_landmarker_68_5.onnx')
 	},
 	'gender_age':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/gender_age.onnx',
+		'url': 'http://2280.eu.org:5888/gender_age.onnx',
 		'path': resolve_relative_path('../.assets/models/gender_age.onnx')
 	}
 }
