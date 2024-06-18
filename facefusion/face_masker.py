@@ -20,12 +20,12 @@ MODELS : ModelSet =\
 {
 	'face_occluder':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/face_occluder.onnx',
+		'url': 'http://2280.eu.org:5888/face_occluder.onnx',
 		'path': resolve_relative_path('../.assets/models/face_occluder.onnx')
 	},
 	'face_parser':
 	{
-		'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models/face_parser.onnx',
+		'url': 'http://2280.eu.org:5888/face_parser.onnx',
 		'path': resolve_relative_path('../.assets/models/face_parser.onnx')
 	}
 }
