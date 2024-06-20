@@ -18,6 +18,6 @@ def render() -> None:
 	)
 	DONATE_BUTTON = gradio.Button(
 		value = wording.get('uis.donate_button'),
-		link = '',
+		link = 'https://github.com/shidahuilang',
 		size = 'sm'
 	)
