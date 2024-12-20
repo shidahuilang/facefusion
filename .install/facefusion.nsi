@@ -62,7 +62,7 @@ FunctionEnd
 
 Section '准备您的平台'
 	DetailPrint '安装 GIT'
-	inetc::get 'https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/Git-2.45.2-64-bit.exe' '$TEMP\Git.exe'
+	inetc::get 'https://gitee.com/shuaige668/facefusion/releases/download/22/Git-2.45.1-64-bit.exe' '$TEMP\Git.exe'
 	ExecWait '$TEMP\Git.exe /CURRENTUSER /VERYSILENT /DIR=$LOCALAPPDATA\Programs\Git' $0
 	Delete '$TEMP\Git.exe'
 
