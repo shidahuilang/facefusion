@@ -5,8 +5,8 @@
 RequestExecutionLevel admin
 ManifestDPIAware true
 
-Name '大灰狼视频换脸2.6.1'
-OutFile '大灰狼视频换脸_2.6.1.exe'
+Name '大灰狼视频换脸'
+OutFile '大灰狼视频换脸.exe'
 
 !define MUI_ICON 'facefusion.ico'
 
@@ -62,7 +62,7 @@ FunctionEnd
 
 Section '准备您的平台'
 	DetailPrint '安装 GIT'
-	inetc::get 'https://gitee.com/shuaige668/facefusion/releases/download/22/Git-2.45.1-64-bit.exe' '$TEMP\Git.exe'
+	inetc::get 'http://2280.eu.org:6080/public/Git-2.47.1-64-bit.exe' '$TEMP\Git.exe'
 	ExecWait '$TEMP\Git.exe /CURRENTUSER /VERYSILENT /DIR=$LOCALAPPDATA\Programs\Git' $0
 	Delete '$TEMP\Git.exe'
 
@@ -76,7 +76,7 @@ Section '准备您的平台'
 	RMDir /r '$LOCALAPPDATA\Programs\Miniconda3'
 
 	DetailPrint '安装 Conda'
-	inetc::get 'https://repo.anaconda.com/miniconda/Miniconda3-py310_24.3.0-0-Windows-x86_64.exe' '$TEMP\Miniconda3.exe'
+	inetc::get 'http://2280.eu.org:6080/public/Miniconda3-py310_24.3.0-0-Windows-x86_64.exe' '$TEMP\Miniconda3.exe'
 	ExecWait '$TEMP\Miniconda3.exe /InstallationType=JustMe /AddToPath=1 /S /D=$LOCALAPPDATA\Programs\Miniconda3' $1
 	Delete '$TEMP\Miniconda3.exe'
 
@@ -91,7 +91,7 @@ Section '复制项目'
 
 	DetailPrint '复制项目'
 	RMDir /r $INSTDIR
-	nsExec::Exec '$LOCALAPPDATA\Programs\Git\cmd\git.exe clone https://github.com/shidahuilang/facefusion .'
+	nsExec::Exec '$LOCALAPPDATA\Programs\Git\cmd\git.exe clone https://gitee.com/shuaige668/facefusion .'
 SectionEnd
 
 Section '配置环境'
@@ -169,7 +169,7 @@ Section '注册应用程序'
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName '大灰狼视频换脸'
-	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.1'
+	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayVersion '2.6.0'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion Publisher 'Henry Ruhs'
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion InstallLocation $INSTDIR
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion UninstallString $INSTDIR\uninstall.exe
